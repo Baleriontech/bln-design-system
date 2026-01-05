@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import Button from './Button';
+import { BUTTON_VARIANTS } from './Button.constants';
 
 const meta = {
   component: Button,
@@ -14,10 +15,10 @@ const meta = {
   argTypes: {
     variant: {
       control: "select",
-      options: ['primary', 'secondary'],
+      options: BUTTON_VARIANTS,
       table: {
         type: {
-          summary: `'primary' | 'secondary'`,
+          summary: `'${BUTTON_VARIANTS.join(`' | '`)}'`,
         },
       }
     }
