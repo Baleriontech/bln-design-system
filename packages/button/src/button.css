@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+/* Components layer = perfect for design systems */
+@layer components {
+  .bln-button {
+    @apply
+      px-4 py-2
+      rounded-full
+      cursor-pointer
+      transition-all duration-150
+      active:scale-90
+      hover:brightness-95
+      hover:-translate-y-0.5
+      hover:shadow-md;
+  }
+
+  /* ===== Variants ===== */
+
+  .bln-button--primary {
+    @apply bg-(--primary) text-white font-medium;
+  }
+
+  .bln-button--outlined {
+    @apply border border-(--primary) text-(--primary);
+  }
+
+  .bln-button--glass {
+    @apply
+      relative
+      text-white font-bold
+      bg-white/10
+      backdrop-blur-sm
+      border border-white/40
+      overflow-hidden
+      hover:bg-white/20;
+  }
+
+  .bln-button--glass::before {
+    content: "";
+    @apply
+      absolute inset-0
+      bg-linear-to-br
+      from-white/10 via-white/5 to-transparent
+      rounded-full
+      pointer-events-none;
+    transform: translateX(-60%);
+    transition: transform 700ms;
+  }
+
+  .bln-button--glass:hover::before {
+    transform: translateX(60%);
+  }
+}
