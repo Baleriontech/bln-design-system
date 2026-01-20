@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import Button from './Button';
-import { BUTTON_VARIANTS } from './Button.constants';
+import Button from './src/Button';
+import { BUTTON_VARIANTS } from './src/Button.constants';
 
 const meta = {
   component: Button,
@@ -9,7 +9,6 @@ const meta = {
   tags: ['mock'],
   args: {
     children: 'Button',
-    className: '',
     variant: 'primary',
   },
   argTypes: {
@@ -41,9 +40,31 @@ export const Primary: Story = {
   },
 };
 
-export const Secondary: Story = {
+export const Outlined: Story = {
   args: {
-    children: 'Secondary 🫥',
-    variant: 'secondary',
+    children: 'Outlined 🫥',
+    variant: 'outlined',
   }
+};
+
+export const Glass: Story = {
+  args: {
+    children: 'Liquid Glass 💧',
+    variant: 'glass',
+  },
+  decorators: [
+    (Story) => (
+      <div
+        className="
+          w-120
+          h-40
+          flex items-center justify-center
+          bg-[url(asset/glass_bg.jpg)]
+          bg-cover
+        "
+      >
+        <Story />
+      </div>
+    ),
+  ],
 };

@@ -1,0 +1,10 @@
+{
+  "name": "@bln-design-system/button",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "build": "tsup ."
+  },
+  "license": "ISC",
+  "packageManager": "pnpm@10.22.0"
+}

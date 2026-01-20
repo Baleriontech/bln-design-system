@@ -9,7 +9,7 @@
     "skipLibCheck": true,
 
     "paths": {
-      "bln-design-system": ["./lib/main.ts"],
+      "bln-design-system": ["./packages/main.ts"],
       "@/*": ["./*"]
     },
 
@@ -29,5 +29,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "lib"]
+  "include": ["src", "packages"]
 }
