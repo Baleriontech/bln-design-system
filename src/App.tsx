@@ -1,4 +1,4 @@
-import Button from '../packages/button/index'
+import Button from '../packages/button/src/index'
 import './App.css'
 // import { Button } from 'bln-design-system'
 

@@ -2,9 +2,26 @@
   "name": "@bln-design-system/button",
   "version": "0.0.1",
   "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
   "scripts": {
-    "build": "tsup ."
+    "build": "tsup"
   },
   "license": "ISC",
-  "packageManager": "pnpm@10.22.0"
+  "packageManager": "pnpm@10.22.0",
+  "devDependencies": {
+    "tsup": "^8.5.1"
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.7.1"
+  }
 }
