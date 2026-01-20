@@ -13,7 +13,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --color-primary: : #747bff;
+  
+  --primary: #303032;
 }
 
 a {
@@ -50,8 +51,5 @@ h2 {
   }
   a:hover {
     color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
   }
 }

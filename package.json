@@ -1,6 +1,7 @@
 {
   "name": "bln-design-system",
   "version": "0.0.2",
+  "description": "Balerion, Back-Office Component UI Library",
   "type": "module",
   "files": [
     "dist"
