@@ -13,8 +13,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
-  --primary: #262323;
+
+  --primary: #2f32d4;
 }
 
 a {
