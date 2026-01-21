@@ -1,5 +1,6 @@
 'use client';
 // for support serverside
+import "./Button.css"
 
 import { buttonVariants } from "./Button.constants"
 import type { IButtonProps } from "./Button.types"
