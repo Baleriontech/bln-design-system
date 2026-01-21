@@ -28,21 +28,12 @@ export default defineConfig({
       ],
     })
   ],
-  build: {
-    lib: {
-      entry: resolve(dirname, 'lib/main.js'),
-      name: 'bln-design-system',
-      fileName: 'bln-design-system'
-    },
-    rollupOptions: {
-      external: ['react', 'react-dom', 'react/jsx-runtime'],
-      output: {
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDom',
-          'react/jsx-runtime': 'react/jsx-runtime'
-        }
-      }
+  resolve: {
+    alias: {
+      '@bln-design-system/button': path.resolve(
+        __dirname,
+        'packages/button/src/index.ts'
+      )
     }
   },
   test: {

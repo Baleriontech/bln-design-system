@@ -1,6 +1,8 @@
 
-:root {
-  --default-primary: #2e2e2e;
+@layer components {
+  * {
+    --default-primary: #2e2e2e;
+  }
 }
 
 /* ===== Base Button ===== */
