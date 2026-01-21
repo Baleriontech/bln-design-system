@@ -3,6 +3,16 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import Button from './src/index';
 import { BUTTON_VARIANTS } from './src/Button.constants';
 
+const description = `
+Buttons are used to trigger actions.
+
+### Installation
+
+\`\`\`bash
+npm install @bln-design-system/button
+\`\`\`
+`
+
 const meta = {
   component: Button,
   title: 'Action/Button',
@@ -25,6 +35,9 @@ const meta = {
   parameters: {
     docs: {
       toc: {
+      },
+      description: {
+        component: description,
       },
     }
   }
