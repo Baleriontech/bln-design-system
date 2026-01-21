@@ -14,7 +14,8 @@
     "react-dom": ">=18"
   },
   "scripts": {
-    "build": "tsup"
+    "build": "tsup",
+    "prepublishOnly": "pnpm run build"
   },
   "license": "ISC",
   "packageManager": "pnpm@10.22.0",

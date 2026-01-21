@@ -1,6 +1,5 @@
-import Button from '../packages/button/src/index'
 import './App.css'
-// import { Button } from 'bln-design-system'
+import Button from '@bln-design-system/button'
 
 function App() {
 

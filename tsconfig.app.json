@@ -9,10 +9,9 @@
     "skipLibCheck": true,
 
     "paths": {
-      "bln-design-system": ["./packages/main.ts"],
+      "@bln-design-system/button": ["./packages/button/src/index.ts"],
       "@/*": ["./*"]
     },
-
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
