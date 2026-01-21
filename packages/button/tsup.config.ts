@@ -8,5 +8,6 @@ export default defineConfig({
   sourcemap: true,
   external: ["react", "react-dom"],
   tsconfig: "./tsconfig.json",
-  loader: { '.css': 'css' }
+  loader: { '.css': 'local-css' },
+  injectStyle: true
 })
