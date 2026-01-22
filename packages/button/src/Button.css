@@ -1,56 +1,78 @@
-@import 'tailwindcss';
-
 @layer components {
-
   * {
-     --btn-primary: var(--primary, var(--default-primary))
+    --default-primary: #2e2e2e;
   }
+}
 
-  .bln-button {
-    @apply
-      px-4 py-2
-      rounded-full
-      cursor-pointer
-      transition-all duration-150
-      active:scale-90
-      hover:brightness-95
-      hover:-translate-y-0.5
-      hover:shadow-md;
-  }
+/* ===== Base Button ===== */
+.bln-button {
+  padding: 0.5rem 1rem;              /* px-4 py-2 */
+  border-radius: 9999px;             /* rounded-full */
+  cursor: pointer;
+  transition: all 150ms ease;        /* transition-all duration-150 */
+}
 
-  /* ===== Variants ===== */
+.bln-button:hover {
+  filter: brightness(0.95);          /* hover:brightness-95 */
+  transform: translateY(-0.125rem);  /* hover:-translate-y-0.5 */
+  box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1);  /* hover:shadow-md */
+}
 
-  .bln-button--primary {
-    @apply bg-(--btn-primary) text-white font-medium;
-  }
+.bln-button:active {
+  transform: scale(0.9);             /* active:scale-90 */
+}
 
-  .bln-button--outlined {
-    @apply border border-(--btn-primary) text-(--btn-primary);
-  }
+/* ===== Variants ===== */
 
-  .bln-button--glass {
-    @apply
-      relative
-      text-white font-bold
-      bg-white/10
-      backdrop-blur-sm
-      border border-white/40
-      overflow-hidden
-      hover:bg-white/20;
-  }
+/* Primary */
+.bln-button--primary {
+  background-color: var(--primary, var(--default-primary));
+  color: #ffffff;
+  font-weight: 500;                  /* font-medium */
+}
 
-  .bln-button--glass::before {
-    @apply
-      absolute inset-0
-      bg-linear-to-br
-      from-white/10 via-white/5 to-transparent
-      rounded-full
-      pointer-events-none;
-    transform: translateX(-60%);
-    transition: transform 700ms;
-  }
+/* Outlined */
+.bln-button--outlined {
+  border: 1px solid var(--primary, var(--default-primary));
+  color: var(--primary, var(--default-primary));
+  background-color: transparent;
+}
 
-  .bln-button--glass:hover::before {
-    transform: translateX(60%);
-  }
+/* Glass */
+.bln-button--glass {
+  position: relative;
+  font-weight: 700;                  /* font-bold */
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);        /* backdrop-blur-sm */
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  overflow: hidden;
+}
+
+.bln-button--glass:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Glass shine effect */
+.bln-button--glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.05),
+    transparent
+  );
+  border-radius: 9999px;
+  pointer-events: none;
+  transform: translateX(-60%);
+  transition: transform 700ms ease;
+}
+
+.bln-button--glass:hover::before {
+  transform: translateX(60%);
 }
