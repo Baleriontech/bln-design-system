@@ -1,6 +1,6 @@
 {
   "name": "@bln-design-system/button",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
@@ -15,7 +15,7 @@
   },
   "scripts": {
     "build": "tsup",
-    "prepublishOnly": "pnpm version patch --no-git-tag-version && pnpm run build"
+    "prepublishOnly": "pnpm run build"
   },
   "license": "ISC",
   "packageManager": "pnpm@10.22.0",
