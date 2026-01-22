@@ -75,24 +75,22 @@ jobs:
           OUTPUT=$(pnpm --filter $PACKAGE_NAME exec npm version ${{ inputs.release }} --no-git-tag-version)
           VERSION=$(echo "$OUTPUT" | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+' | sed 's/^v//')
           echo "VERSION=$VERSION" >> $GITHUB_ENV
-      - name: Commit Version Change
-        run: |
-          git add .
-          git commit -m ":bookmark: ${PACKAGE_NAME} $VERSION"
-          BRANCH=release/${PACKAGE_NAME}-${VERSION}
-          git checkout -b $BRANCH
-          git push origin HEAD
 
-      - name: Create Pull Request
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Release PR
         run: |
+          SAFE_NAME=$(echo "$PACKAGE_NAME" | sed 's/@//; s/\//-/g')
+          BRANCH="release/${SAFE_NAME}-${VERSION}"
+
+          git checkout -b "$BRANCH"
+          git push origin "$BRANCH"
+
           gh pr create \
             --base main \
-            --head release/${PACKAGE_NAME}-${VERSION} \
-            --title ":bookmark: ${PACKAGE_NAME} $VERSION" \
-            --body "Automated release"
-
+            --head "$BRANCH" \
+            --title ":bookmark: ${PACKAGE_NAME} ${VERSION}" \
+            --body "Automated release of ${PACKAGE_NAME} v${VERSION}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish
         run: |
