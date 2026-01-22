@@ -1,6 +1,5 @@
-import Button from './Button'
-
 export * from "./Button"
 export type * from "./Button.types"
 
-export default Button;
+// for playground
+export { default } from "./Button";
