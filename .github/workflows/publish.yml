@@ -98,7 +98,7 @@ jobs:
 
       - name: Publish
         run: |
-          pnpm install -D tsup
+          pnpm install --fronzen-lockfile
           if [ -z "${{ inputs.custom-tag }}" ]; then
             echo "Publishing with default tag (latest)"
             pnpm --filter $PACKAGE_NAME publish --access public --no-git-checks
