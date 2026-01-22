@@ -83,6 +83,9 @@ jobs:
           BRANCH="release/${SAFE_NAME}-${VERSION}"
 
           git checkout -b "$BRANCH"
+
+          git add .
+          git commit -m ":bookmark: ${PACKAGE_NAME} ${VERSION}"
           git push origin "$BRANCH"
 
           gh pr create \
