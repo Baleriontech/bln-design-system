@@ -63,7 +63,7 @@ jobs:
           esac
       
       - name: Install Dependencies
-        run: pnpm --filter $PACKAGE_NAME install
+        run: pnpm install --frozen-lockfile
       
       - name: Update Version
         run: pnpm --filter $PACKAGE_NAME version ${{ inputs.release }} 
