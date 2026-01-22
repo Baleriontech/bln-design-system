@@ -90,7 +90,7 @@ jobs:
           gh pr create \
             --base main \
             --head release/${PACKAGE_NAME}-${VERSION} \
-            --title "chore(release): ${PACKAGE_NAME} v${VERSION}" \
+            --title ":bookmark: ${PACKAGE_NAME} $VERSION" \
             --body "Automated release"
 
 
