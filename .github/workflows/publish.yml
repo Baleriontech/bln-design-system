@@ -98,7 +98,6 @@ jobs:
 
       - name: Publish
         run: |
-          pnpm install --filter $PACKAGE_NAME --frozen-lockfile
           if [ -z "${{ inputs.custom-tag }}" ]; then
             echo "Publishing with default tag (latest)"
             pnpm --filter $PACKAGE_NAME publish --access public --no-git-checks
