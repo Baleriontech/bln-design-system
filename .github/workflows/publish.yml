@@ -66,7 +66,7 @@ jobs:
         run: pnpm install --frozen-lockfile
       
       - name: Update Version
-        run: pnpm --filter $PACKAGE_NAME version ${{ inputs.release }} 
+        run: pnpm --filter $PACKAGE_NAME  exec npm version ${{ inputs.release }} 
 
       - name: 
         run: |
