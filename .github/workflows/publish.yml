@@ -3,7 +3,7 @@ name: Publish to NPM
 on:
   workflow_dispatch:
     inputs:
-      component: 
+      component:
         description: "Component (Package Name)"
         required: true
         type: choice
@@ -61,14 +61,27 @@ jobs:
               echo "Unknown component" && exit 1
               ;;
           esac
-      
+
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
-      
-      - name: Update Version
-        run: pnpm --filter $PACKAGE_NAME  exec npm version ${{ inputs.release }} 
 
-      - name: 
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Update Version
+        run: |
+          OUTPUT=$(pnpm --filter $PACKAGE_NAME exec npm version ${{ inputs.release }} --no-git-tag-version)
+          VERSION=$(echo "$OUTPUT" | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+' | sed 's/^v//')
+          echo "VERSION=$VERSION" >> $GITHUB_EN
+      - name: Commit Change
+        run: |
+          git add .
+          git commit -m ":bookmark: ${PACKAGE_NAME} $VERSION"
+          git push origin HEAD
+
+      - name: Publish
         run: |
           if [ -z "${{ inputs.custom-tag }}" ]; then
             echo "Publishing with default tag (latest)"
@@ -77,5 +90,3 @@ jobs:
             echo "Publishing with tag: ${{ inputs.custom-tag }}"
             pnpm --filter $PACKAGE_NAME publish --access public --tag ${{ inputs.custom-tag }}
           fi
-
-

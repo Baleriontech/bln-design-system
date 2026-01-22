@@ -1,6 +1,6 @@
 {
   "name": "@bln-design-system/button",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
@@ -8,7 +8,9 @@
   "files": [
     "dist"
   ],
-  "sideEffects": ["*.css"],
+  "sideEffects": [
+    "*.css"
+  ],
   "peerDependencies": {
     "react": ">=18",
     "react-dom": ">=18"
