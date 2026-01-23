@@ -96,6 +96,9 @@ jobs:
         env:
           GH_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
+      - name: Upgrade npm for OIDC support
+        run: npm install -g npm@latest
+
       - name: Publish
         run: |
           pnpm --filter $PACKAGE_NAME install --frozen-lockfile
