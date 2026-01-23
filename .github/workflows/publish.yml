@@ -96,11 +96,9 @@ jobs:
         env:
           GH_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
-      - name: Build Package
-        run: pnpm --filter $PACKAGE_NAME run build
-
       - name: Publish
         run: |
+          pnpm --filter $PACKAGE_NAME install --frozen-lockfile
           if [ -z "${{ inputs.custom-tag }}" ]; then
             echo "Publishing with default tag (latest)"
             pnpm --filter $PACKAGE_NAME publish --access public --no-git-checks
