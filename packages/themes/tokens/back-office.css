@@ -1,4 +1,6 @@
-:root {
-  --primary: #494cea;
-  --secondary: #ff4d4d;
+@layer theme {
+  :root {
+    --primary: #494cea;
+    --secondary: #ff4d4d;
+  }
 }
