@@ -2,5 +2,7 @@
   :root {
     --primary: #494cea;
     --secondary: #ff4d4d;
+
+    --action-border-radius: 50dvh;
   }
 }
