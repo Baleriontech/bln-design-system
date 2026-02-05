@@ -1,13 +1,14 @@
 @layer components {
   * {
     --default-primary: #2e2e2e;
+    --default-action-border-radius: 50dvh;
   }
 }
 
 /* ===== Base Button ===== */
 .bln-button {
   padding: 0.5rem 1rem;              /* px-4 py-2 */
-  border-radius: 9999px;             /* rounded-full */
+  border-radius: var(--action-border-radius, var(--default-action-border-radius));
   cursor: pointer;
   transition: all 150ms ease;        /* transition-all duration-150 */
 }
@@ -67,7 +68,7 @@
     rgba(255, 255, 255, 0.05),
     transparent
   );
-  border-radius: 9999px;
+  border-radius: var(--action-border-radius, var(--default-action-border-radius));
   pointer-events: none;
   transform: translateX(-60%);
   transition: transform 700ms ease;

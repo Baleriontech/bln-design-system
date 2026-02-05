@@ -1,0 +1,8 @@
+@layer theme {
+  :root {
+    --primary: #002841;
+    --secondary: #7299B2;
+
+    --action-border-radius: 8px;
+  }
+}
