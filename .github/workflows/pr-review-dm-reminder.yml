@@ -1,0 +1,26 @@
+name: Daily PR Review DM Reminder
+
+# Schedule to run at 9 PM on workdays
+on:
+  schedule:
+    # Runs at 2:00 AM UTC (9:00 AM Singapore Time) Monday-Friday
+    - cron: "0 2 * * 1-5"
+  # Allow manual testing
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  send-dm-reminders:
+    name: Send PR Review DM Reminders
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send DM Reminders
+        # uses: Baleriontech/github-action-lib/pr-review-dm-reminder@copilot/add-slack-bot-for-pr-reminders
+        uses: Baleriontech/github-action-lib/pr-review-dm-reminder@main
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          slack-bot-token: ${{ secrets.HELEN_SLACK_BOT_TOKEN }}
+          repository: ${{ github.repository }}

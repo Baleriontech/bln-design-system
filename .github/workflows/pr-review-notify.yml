@@ -1,0 +1,27 @@
+name: PR Review Notifications and Reminders
+
+on:
+  pull_request_target:
+    types: [review_requested, closed]
+  workflow_dispatch:
+
+jobs:
+  notify-review-request:
+    name: Notify Reviewers
+    if: github.event.action == 'review_requested'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Slack Notification
+        uses: Baleriontech/github-action-lib/pr-review-notify@main
+        with:
+          slack-webhook-url: ${{ secrets.HELEN_SLACK_WEBHOOK_URL }}
+
+  handle-pr-closed:
+    name: Handle PR Closed
+    if: github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Approval and Notify
+        uses: Baleriontech/github-action-lib/pr-merged-without-approval@main
+        with:
+          slack-webhook-url: ${{ secrets.HELEN_SLACK_WEBHOOK_URL }}

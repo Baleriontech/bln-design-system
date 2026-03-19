@@ -1,0 +1,13 @@
+name: PR Closed Cleanup
+
+on:
+  pull_request_target:
+    types: [closed]
+
+jobs:
+  cleanup:
+    name: Remove Pending Review Requests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cleanup recap DB
+        uses: Baleriontech/github-action-lib/pr-closed-cleanup@main

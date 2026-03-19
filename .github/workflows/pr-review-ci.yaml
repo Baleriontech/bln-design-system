@@ -1,0 +1,74 @@
+name: 'PR review for Pipeline :D'
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions: write-all
+
+jobs:
+  notify-start:
+    name: Notify CI Start
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Slack Notification Start
+        uses: Baleriontech/github-action-lib/slack-notify@main
+        with:
+          slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          notification-type: 'start'
+          workflow-run-url: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+  code-review:
+    name: AI Code Review
+    runs-on: ubuntu-latest
+    needs: notify-start
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      # Use your reusable GitHub Action instead of inline code
+      - name: AI Code Review
+        uses: Baleriontech/github-action-lib/ai-code-review@main
+        with:
+          azure-openai-endpoint: ${{ secrets.AZURE_OPENAI_ENDPOINT }}
+          azure-openai-api-key: ${{ secrets.AZURE_OPENAI_API_KEY }}
+          pr-number: ${{ github.event.pull_request.number }}
+
+  notify-complete:
+    name: Notify CI Completion
+    runs-on: ubuntu-latest
+    #TODO - Add a condition to check if the job is cancelled
+    needs: [notify-start, code-review]
+    if: always() # Run even if previous jobs fail
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Get Job Status
+        id: job-status
+        run: |
+          if [[ "${{ contains(needs.*.result, 'failure') }}" == "true" ]]; then
+            echo "status=failure" >> $GITHUB_OUTPUT
+          elif [[ "${{ contains(needs.*.result, 'cancelled') }}" == "true" ]]; then
+            echo "status=cancelled" >> $GITHUB_OUTPUT
+          else
+            echo "status=success" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Slack Notification Complete
+        uses: Baleriontech/github-action-lib/slack-notify@main
+        with:
+          slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          notification-type: 'complete'
+          job-status: ${{ steps.job-status.outputs.status }}
+          workflow-run-url: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}

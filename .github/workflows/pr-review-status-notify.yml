@@ -1,0 +1,21 @@
+name: PR Review Status Notifications
+
+# Trigger when a review is submitted on a PR
+on:
+  pull_request_review:
+    types: [submitted]
+  # Allow manual testing
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  notify-pr-owner:
+    name: Notify PR Owner
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Slack Notification
+        uses: Baleriontech/github-action-lib/pr-review-status-notify@main
+        with:
+          slack-webhook-url: ${{ secrets.HELEN_SLACK_WEBHOOK_URL }}
